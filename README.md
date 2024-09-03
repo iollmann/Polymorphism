@@ -15,7 +15,7 @@ cruft like this in it.  I remember Steve Jobs had a lot of trouble pronouncing J
 
 With publicly facing vtbls (virtual function tables) like this a lot more becomes possible
 like having an object magically change class on the fly.  Whether or not this is a good 
-idea is another matter. It is a little inconvenient to use. You can see the effort the 
+idea is another matter. The design is a little inconvenient to use. You can see the effort the 
 C++ committee went through to clean that up, and why various bits work the way they do.
 
 ## Bugs
