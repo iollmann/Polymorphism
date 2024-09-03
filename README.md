@@ -1,4 +1,4 @@
-# Polymorphism
+# Polymorphism in C
 An educational exercise implementing C++ polymorphism in C
 
 My son is taking his first college programming class (at his actual college) which teaches programming
