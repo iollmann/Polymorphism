@@ -53,8 +53,11 @@ typedef struct Object
     const Vtbl * __nonnull vtbl;
 }Object;
 
-/*! @abstract return the class name for the object */
+/*! @abstract return the class  for the object */
 static inline const Vtbl * __nonnull Object_GetClass(const Object * __nonnull me){ return me->vtbl; }
+
+/*! @abstract set the class name for the object. Needed in constructors. Otherwise dangerous.  */
+static inline void Object_SetClass(Object * __nonnull me, const Vtbl * __nonnull vtbl){ me->vtbl = vtbl;}
 
 /*! @abstract return the class name for the object */
 static inline const char * __nonnull Object_GetClassName(const Object * __nonnull me){ return Object_GetClass(me)->name; }
@@ -64,15 +67,15 @@ static inline const char * __nonnull Object_GetClassName(const Object * __nonnul
  *               1) call their parent constructor with {me, ...} as arguments
  *               2) set me->vtbl = <ChildType_Vtbl>
  *               3) initialize...  */
-static inline void Object_Constructor( Object * __nonnull me){me->vtbl = &kObjectVtbl;}
+static inline Object Object_Constructor(void){Object result; result.vtbl = &kObjectVtbl; return result;}
 
 /*! @abstract Make a new object on the heap  */
-#define NEW( _type, ...)                                 \
-    ({                                                   \
-        _type * result = calloc(sizeof(_type), 1);       \
-        if(result)                                       \
-            _type ## _Constructor(result __VA_OPT__(,) __VA_ARGS__);    \
-        /* return */ result;                             \
+#define NEW( _type, ...)                                    \
+    ({                                                      \
+        _type * result = (_type*) calloc(sizeof(_type), 1); \
+        if(result)                                          \
+            result[0] = _type ## _Constructor(__VA_ARGS__); \
+        /* return */ result;                                \
     })
 
 // Convention: methods of <ObjectName> start with the <ObjectName>_ prefix

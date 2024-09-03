@@ -40,10 +40,12 @@ typedef struct Animal
     Object      object;
 }Animal;
 
-static inline void Animal_Constructor( Animal * __nonnull me)
+static inline Animal Animal_Constructor(void)
 {
-    Object_Constructor(&me->object);
-    me->object.vtbl = &kAnimalVtbl.object;
+    Animal result = (Animal){ .object = Object_Constructor() };
+    Object_SetClass( &result.object, &kAnimalVtbl.object);
+    // Init Animal here
+    return result;
 }
 static inline const Animal_Vtbl * __nonnull Animal_GetClass(const Animal * __nonnull me){ return (const Animal_Vtbl*) me->object.vtbl; }
 static inline const char * __nonnull Animal_GetCall(const Animal * __nonnull me){ return Animal_GetClass(me)->getCall(me);}
@@ -81,10 +83,12 @@ const Lion_Vtbl kLionVtbl = (Lion_Vtbl)
     }
 };
 
-static inline void Lion_Constructor( Lion * __nonnull me)
+static inline Lion Lion_Constructor(void)
 {
-    Animal_Constructor( &me->animal);
-    me->animal.object.vtbl = &kLionVtbl.animal.object;
+    Lion result = (Lion){ .animal = Animal_Constructor() };
+    Object_SetClass( (Object*) &result, &kLionVtbl.animal.object );
+    // Init Lion here
+    return result;
 }
 
 
@@ -122,10 +126,12 @@ const Sheep_Vtbl kSheepVtbl = (Sheep_Vtbl)
     }
 };
 
-static inline void Sheep_Constructor( Sheep * __nonnull me)
+static inline Sheep Sheep_Constructor(void)
 {
-    Animal_Constructor( &me->animal);
-    me->animal.object.vtbl = &kSheepVtbl.animal.object;
+    Sheep result = (Sheep){ .animal = Animal_Constructor() };
+    Object_SetClass( (Object*) &result, &kSheepVtbl.animal.object );
+    // Init Sheep here
+    return result;
 }
 
 

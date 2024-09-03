@@ -8,10 +8,18 @@
 #include "Animals.h"
 #include <stdio.h>
 
+void PrintAnimalCall( const Animal * animal, const char * type)
+{
+    printf( "The %s %s says \"%s\"\n",
+            type,
+            Object_GetClassName( (const Object*) animal),
+            Animal_GetCall( animal ));
+}
+
 int main(int argc, const char * argv[]) {
 
     // Base class
-    Object o;  Object_Constructor( &o);     // on stack
+    Object o = Object_Constructor();     // on stack
     Object * oP = NEW(Object);              // on heap
     
     // clean up
@@ -19,23 +27,23 @@ int main(int argc, const char * argv[]) {
     DELETE(oP);
     
     // Make some lion objects
-    Lion lion; Lion_Constructor(&lion);
+    Lion lion = Lion_Constructor();
     Lion * lionP = NEW(Lion);
 
     // Use them polymorphically
-    printf( "The lion says %s\n", Animal_GetCall( (Animal*) &lion));
-    printf( "The lionP says %s\n", Animal_GetCall( (Animal*) lionP));
+    PrintAnimalCall( (const Animal*) &lion, "stack");
+    PrintAnimalCall( (const Animal*) lionP, "heap");
 
     // clean up lions
     Object_Destroy((Object*) &lion);
     DELETE((Object*) lionP);
 
     // Do the same for sheep
-    Sheep sheep; Sheep_Constructor(&sheep);
+    Sheep sheep = Sheep_Constructor();
     Sheep * sheepP = NEW(Sheep);
 
-    printf( "The sheep says %s\n", Animal_GetCall( (Animal*) &sheep));
-    printf( "The sheepP says %s\n", Animal_GetCall( (Animal*) sheepP));
+    PrintAnimalCall( (const Animal*) &sheep, "stack");
+    PrintAnimalCall( (const Animal*) sheepP, "heap");
 
     Object_Destroy((Object*) &sheep);
     DELETE((Object*) sheepP);
