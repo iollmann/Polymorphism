@@ -18,6 +18,10 @@ like having an object magically change class on the fly.  Whether or not this is
 idea is another matter. The design is a little inconvenient to use. You can see the effort the 
 C++ committee went through to clean that up, and why various bits work the way they do.
 
+I believe the compiled result works in the style of what you get from a C++ compiler.
+To the extent that is true, performance should be similar. Obviously, all of the lovely
+C++ compile time correctness checks are missing. C++ is a better C++ than C.
+
 ## Bugs
 The way the Vtbls are defined right now, I don't believe you can just compare Vtbl 
 addresses to see if the two objects have the same class. Some linkers might consolidate 
