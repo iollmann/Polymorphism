@@ -64,7 +64,7 @@ static inline const char * __nonnull Object_GetClassName(const Object * __nonnul
  *               1) call their parent constructor with {me, ...} as arguments
  *               2) set me->vtbl = <ChildType_Vtbl>
  *               3) initialize...  */
-static inline Object Object_Constructor( Object * __nonnull me){me->vtbl = &kObjectVtbl; return *me;}
+static inline void Object_Constructor( Object * __nonnull me){me->vtbl = &kObjectVtbl;}
 
 /*! @abstract Make a new object on the heap  */
 #define NEW( _type, ...)                                 \
