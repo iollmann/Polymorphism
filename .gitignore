@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#Trash
+.DS_Store
+
+#Other peoples config files
+xcuserdata/
