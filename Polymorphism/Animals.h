@@ -25,7 +25,7 @@ typedef struct Animal_Vtbl
     const char * __nonnull (*__nonnull getCall)(const Animal * __nonnull me);
 }Animal_Vtbl;
 
-const Animal_Vtbl kAnimalVtbl = (Animal_Vtbl)
+static const Animal_Vtbl kAnimalVtbl = (Animal_Vtbl)
 {
     .object = (Vtbl){
         .name = "Animal",
@@ -70,7 +70,7 @@ typedef struct Lion
 
 static inline const char * __nonnull Lion_GetCall(const Animal * __nonnull me){ return "Roar!"; }
 
-const Lion_Vtbl kLionVtbl = (Lion_Vtbl)
+static const Lion_Vtbl kLionVtbl = (Lion_Vtbl)
 {
     .animal = (Animal_Vtbl)
     {
@@ -113,7 +113,7 @@ typedef struct Sheep
 
 static inline const char * __nonnull Sheep_GetCall(const Animal * __nonnull me){ return "Baa!"; }
 
-const Sheep_Vtbl kSheepVtbl = (Sheep_Vtbl)
+static const Sheep_Vtbl kSheepVtbl = (Sheep_Vtbl)
 {
     .animal = (Animal_Vtbl)
     {
