@@ -10,22 +10,27 @@
 
 int main(int argc, const char * argv[]) {
 
-    // on stack
-    Object o;  Object_Constructor( &o);
-    Object * oP = NEW(Object);
+    // Base class
+    Object o;  Object_Constructor( &o);     // on stack
+    Object * oP = NEW(Object);              // on heap
     
+    // clean up
     Object_Destroy(&o);
     DELETE(oP);
     
+    // Make some lion objects
     Lion lion; Lion_Constructor(&lion);
     Lion * lionP = NEW(Lion);
 
+    // Use them polymorphically
     printf( "The lion says %s\n", Animal_GetCall( (Animal*) &lion));
     printf( "The lionP says %s\n", Animal_GetCall( (Animal*) lionP));
 
+    // clean up lions
     Object_Destroy((Object*) &lion);
     DELETE((Object*) lionP);
 
+    // Do the same for sheep
     Sheep sheep; Sheep_Constructor(&sheep);
     Sheep * sheepP = NEW(Sheep);
 
