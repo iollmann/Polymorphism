@@ -17,3 +17,11 @@ With publicly facing vtbls (virtual function tables) like this a lot more become
 like having an object magically change class on the fly.  Whether or not this is a good 
 idea is another matter. It is a little inconvenient to use. You can see the effort the 
 C++ committee went through to clean that up, and why various bits work the way they do.
+
+## Bugs
+The way the Vtbls are defined right now, I don't believe you can just compare Vtbl 
+addresses to see if the two objects have the same class. Some linkers might consolidate 
+identical global structs and achieve this for you, but I don't believe it is guaranteed. 
+One fix would be to move all the Vtbls off to a separate Vtbl.c file with some extern
+declarations in a vtbl.h header. This is awkward, and I've been looking for something
+nicer.
