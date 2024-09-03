@@ -11,7 +11,7 @@ I actually had to do this once while working at Apple.  The PowerPC 64-bit archi
 just been released in Jaguar (X.2). We were one of the few frameworks asked to go 64-bit 
 on day 1. However, Apple hadn't managed to finish a C++ compiler for it then, so all of 
 our C++ test infrastructure had to be rolled back to C. For all I know, it still has 
-cruft like this in it.  Steve Jobs had a lot of trouble pronouncing Jaguar.
+cruft like this in it.  I remember Steve Jobs had a lot of trouble pronouncing Jaguar.
 
 With publicly facing vtbls (virtual function tables) like this a lot more becomes possible
 like having an object magically change class on the fly.  Whether or not this is a good 
